@@ -11,4 +11,13 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err))
 })
 
+// Route: GET /api/street-arts/:id
+router.get('/:id', (req, res, next) => {
+  StreetArt.findById(req.params.id)
+    .then(streetsArt => {
+      res.json(streetsArt)
+    })
+    .catch(next)
+})
+
 module.exports = router
