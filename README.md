@@ -19,7 +19,11 @@ This project will rely on the following technologies:
 
 ## Overview
 
-### Wireframes
+### Wireframes on Figma
+- [Wireframes on Figma](https://www.figma.com/file/ThXTvVPZaJz53bjMdURF3t/MERN-Street-Art?node-id=0%3A1)
+- [Preview Wireframes on Figma](https://www.figma.com/proto/ThXTvVPZaJz53bjMdURF3t/MERN-Street-Art?node-id=15%3A28&scaling=scale-down)
+
+### Wireframes on a board
 
 To create the wireframes, we have followed some rules (feel free to adapt them for your own projects)
 - Mobile first
@@ -37,47 +41,47 @@ For this project, you will use 3 models:
 - `Visit`: To save the visit of a specific user with a specific street art
 
 #### `User`
-Field | Type
---- | ---
-_id | (Automaticaly generated)
-email | String
-password | String
+Field     | Type
+----------|------------------------------
+_id       | (Automaticaly generated)
+email     | String
+password  | String
 createdAt | Date (Automaticaly generated)
 updatedAt | Date (Automaticaly generated)
 
 #### `StreetArt`
-Field | Type
---- | ---
-_id | (Automaticaly generated)
-pictureUrl | String
-location | (GeoJSON)
--> type | `"Point"`
+Field          | Type
+---------------|------------------------------
+_id            | (Automaticaly generated)
+pictureUrl     | String
+location       | (GeoJSON)
+-> type        | `"Point"`
 -> coordinates | [Number]
-createdAt | Date (Automaticaly generated)
-updatedAt | Date (Automaticaly generated)
+createdAt      | Date (Automaticaly generated)
+updatedAt      | Date (Automaticaly generated)
 
 #### `Visit`
-Field | Type
---- | ---
-_id | (Automaticaly generated)
-_user | Schema.Types.ObjectId
+Field      | Type
+-----------|------------------------------------------
+_id        | (Automaticaly generated)
+_user      | Schema.Types.ObjectId
 _streetArt | Schema.Types.ObjectId
-createdAt | Date (Automaticaly generated at creation)
+createdAt  | Date (Automaticaly generated at creation)
 
 
 ### Backend routes
 
-Route | Type of protection | Description
---- | --- | ---
-`POST /api/signup` | Ø | Sign up the user
-`POST /api/login` | Ø | Log in the user
-`POST /api/logout` | Must be connected | Log out the user
-`GET /api/street-arts` | Ø | Get all street arts
-`GET /api/street-arts/:streetArtId` | Ø | Get the detail of one street art
-`POST /api/street-arts` | Ø | Add a street art
-`GET /api/my-visits` | Must be connected | Get the visits of the connected user
-`POST /api/visits` | Must be connected | Add a visit
-`DELETE /api/visits/:visitId` | Must be the owner | Delete a visit
+Route                               | Type of protection | Description
+------------------------------------|--------------------|-------------------------------------
+`POST /api/signup`                  | Ø                  | Sign up the user
+`POST /api/login`                   | Ø                  | Log in the user
+`POST /api/logout`                  | Must be connected  | Log out the user
+`GET /api/street-arts`              | Ø                  | Get all street arts
+`GET /api/street-arts/:streetArtId` | Ø                  | Get the detail of one street art
+`POST /api/street-arts`             | Ø                  | Add a street art
+`GET /api/my-visits`                | Must be connected  | Get the visits of the connected user
+`POST /api/visits`                  | Must be connected  | Add a visit
+`DELETE /api/visits/:visitId`       | Must be the owner  | Delete a visit
 
 
 ## Iterations
