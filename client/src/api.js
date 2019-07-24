@@ -76,4 +76,11 @@ export default {
       .then(res => res.data)
       .catch(errHandler)
   },
+
+  addStreetArt(uploadData) {
+    return service
+      .post('/street-arts', uploadData)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
 }
