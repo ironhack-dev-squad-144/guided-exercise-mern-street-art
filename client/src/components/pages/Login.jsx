@@ -3,7 +3,7 @@ import api from '../../api'
 import { useForm } from '../../hooks'
 
 export default function Login(props) {
-  const { handleChange, formValues } = useForm()
+  const { handleChange, formValues, getInputProps } = useForm()
 
   const [message, setMessage] = useState(null)
 
@@ -22,21 +22,8 @@ export default function Login(props) {
     <div className="Login">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        Email:{' '}
-        <input
-          type="text"
-          value={formValues.email || ''}
-          name="email"
-          onChange={handleChange}
-        />{' '}
-        <br />
-        Password:{' '}
-        <input
-          type="password"
-          value={formValues.password || ''}
-          name="password"
-          onChange={handleChange}
-        />{' '}
+        Email: <input type="text" {...getInputProps('email')} /> <br />
+        Password: <input type="password" {...getInputProps('password')} />{' '}
         <br />
         <button>Login</button>
       </form>
