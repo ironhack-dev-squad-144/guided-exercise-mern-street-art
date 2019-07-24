@@ -1,31 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import api from '../api'
 import logo from '../logo.svg'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink as NLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap'
 
 function MainNavbar(props) {
+  const [isOpen, setIsOpen] = useState(false)
+  function toggle() {
+    setIsOpen(!isOpen)
+  }
   function handleLogoutClick(e) {
     api.logout()
   }
+  const links = [
+    { to: '/list', text: 'List' },
+    { to: '/map', text: 'Map' },
+    { to: '/new-street-art', text: 'New Street Art' },
+  ]
+  if (!api.isLoggedIn()) {
+    links.push({ to: '/signup', text: 'Signup' })
+    links.push({ to: '/login', text: 'Login' })
+  }
+  if (api.isLoggedIn()) {
+    links.push({ to: '/', text: 'Logout', onClick: handleLogoutClick })
+  }
   return (
-    <nav className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">MERN Boilerplate</h1>
-      <NavLink to="/" exact>
-        Home
-      </NavLink>
-      <NavLink to="/countries">Countries</NavLink>
-      <NavLink to="/add-country">Add country</NavLink>
-      {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-      {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-      {api.isLoggedIn() && (
-        <Link to="/" onClick={handleLogoutClick}>
-          Logout
-        </Link>
-      )}
-      <NavLink to="/secret">Secret</NavLink>
-    </nav>
+    <Navbar color="danger" dark expand="sm">
+      <NavbarBrand tag={Link} to="/">
+        MERN Street Art
+      </NavbarBrand>
+      <NavbarToggler onClick={toggle} />
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className="ml-auto" navbar>
+          {links.map(link => (
+            <NavItem>
+              <NavLink tag={NLink} to={link.to} exact onClick={link.onClick}>
+                {link.text}
+              </NavLink>
+            </NavItem>
+          ))}
+        </Nav>
+      </Collapse>
+    </Navbar>
   )
 }
 

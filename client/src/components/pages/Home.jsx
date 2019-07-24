@@ -5,10 +5,7 @@ export default function Home() {
     <div className="Home">
       <h2>Home</h2>
       <p>This is a sample project with the MERN stack</p>
-
-      <p>
-        <strong>TODO: try another way to manage inputs</strong>
-      </p>
+      <a href="/">Test</a>
     </div>
   )
 }
