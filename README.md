@@ -666,47 +666,44 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl' // NEW
 // Inform your Mapbox token (https://www.mapbox.com/account/)
 mapboxgl.accessToken = 'YourToken' // NEW
 
+export default function StreetArtDetail(props) {
+  const streetArtId = props.match.params.id
+  const mapDomRef = useRef(null) // NEW
+  let map = useRef(null).current // NEW
+  let marker = useRef(null).current // NEW
 
-export default class StreetArtDetail extends Component {
-  constructor(props) {
-    super(props)
-    // ...
+  const [streetArt, setStreetArt] = useState(null)
+  useEffect(() => {
+    api.getStreetArt(streetArtId).then(streetArt => {
+      setStreetArt(streetArt)
+      let [lng, lat] = streetArt.location.coordinates // NEW
+      initMap(lng, lat) // NEW
+    })
+  }, [])
 
-    this.mapRef = React.createRef() // NEW
-    this.map = null // NEW
-    this.marker = null // NEW
-  }
-  initMap(lng, lat) { // NEW METHOD
-    // Embed the map where "this.mapRef" is defined in the render
-    this.map = new mapboxgl.Map({
-      container: this.mapRef.current,
+  function initMap(lng, lat) {
+    // NEW METHOD
+    // Embed the map where "mapDomRef" is defined in the render
+    map = new mapboxgl.Map({
+      container: mapDomRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [lng, lat],
-      zoom: 10
+      zoom: 10,
     })
 
     // Add zoom control on the top right corner
-    this.map.addControl(new mapboxgl.NavigationControl())
+    map.addControl(new mapboxgl.NavigationControl())
 
     // Create a marker on the map with the coordinates ([lng, lat])
-    this.marker = new mapboxgl.Marker({ color: 'red' })
+    marker = new mapboxgl.Marker({ color: 'red' })
       .setLngLat([lng, lat])
-      .addTo(this.map)
+      .addTo(map)
   }
+
   render() {
     // ...
-      <div ref={this.mapRef} style={{height: 400}}></div> {/* NEW */}
+      <div ref={mapDomRef} style={{height: 400}}></div> {/* NEW */}
     // ...
-  }
-  componentDidMount() {
-    api.getStreetArt(this.props.match.params.streetArtId)
-      .then(streetArt => {
-        this.setState({
-          streetArt: streetArt
-        })
-        let [lng,lat] = streetArt.location.coordinates // NEW
-        this.initMap(lng,lat) // NEW
-      })
   }
 }
 ```
