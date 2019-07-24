@@ -42,7 +42,7 @@ function MainNavbar(props) {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           {links.map(link => (
-            <NavItem>
+            <NavItem key={link.to}>
               <NavLink tag={NLink} to={link.to} exact onClick={link.onClick}>
                 {link.text}
               </NavLink>
