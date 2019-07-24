@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import List from './pages/List'
+import StreetArtDetail from './pages/StreetArtDetail'
 import { Container } from 'reactstrap'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/list" component={List} />
+          <Route path="/street-art-detail/:id" component={StreetArtDetail} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </Container>
