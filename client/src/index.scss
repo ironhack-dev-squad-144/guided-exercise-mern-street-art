@@ -10,3 +10,9 @@ $primary: #32c3ff;
   margin-bottom: 30px;
   text-align: left;
 }
+
+.thumbnail-img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+}
